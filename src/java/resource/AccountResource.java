@@ -94,7 +94,8 @@ public class AccountResource {
     @Produces("application/json; charset=UTF-8")
     public Response balanceUpdate(@FormParam("account") int account,
             @FormParam("agency") int agency,
-            @FormParam("price") double price) {
+            @FormParam("price") double price,
+            @FormParam("operation") int operation) {
 
         SessionFactory sf = Util.getSessionFactory();
         Session s = sf.openSession();
@@ -114,7 +115,13 @@ public class AccountResource {
             Account accountObj = (Account) query.list().get(0);
 
             if (accountObj != null) {
-                double newBalance = accountObj.getBalance() - price;
+                double newBalance = 0.0;
+
+                if (operation == Account.DEBT) {
+                    newBalance = accountObj.getBalance() - price;
+                } else if (operation == Account.CREDIT) {
+                    newBalance = accountObj.getBalance() + price;
+                }
                 accountObj.setBalance(newBalance);
 
                 s.update(accountObj);
