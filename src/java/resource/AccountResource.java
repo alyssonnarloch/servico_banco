@@ -110,11 +110,13 @@ public class AccountResource {
 
             Query query = s.createQuery(sql);
             query.setInteger("account", account);
-            query.setInteger("agency", agency);
+            query.setInteger("agency", agency);            
 
-            Account accountObj = (Account) query.list().get(0);
-
-            if (accountObj != null) {
+            List<Account> result = query.list();           
+            
+            if (!result.isEmpty()) {
+                Account accountObj = (Account) query.list().get(0);
+                
                 double newBalance = 0.0;
 
                 if (operation == Account.DEBT) {
@@ -143,6 +145,7 @@ public class AccountResource {
 
             return Response.ok(entity).build();
         } catch (Exception ex) {
+            t.rollback();
             ex.printStackTrace();
             return Response.serverError().build();
         }
