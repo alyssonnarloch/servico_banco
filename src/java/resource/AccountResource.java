@@ -2,7 +2,6 @@ package resource;
 
 import hibernate.Util;
 import java.util.List;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -33,6 +32,7 @@ public class AccountResource {
     @Produces("application/json")
     public String test() {
         return "{oieeee : 1}";
+        
     }
 
     @GET
