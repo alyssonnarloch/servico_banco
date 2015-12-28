@@ -31,8 +31,7 @@ public class AccountResource {
     @GET
     @Produces("application/json")
     public String test() {
-        return "{oieeee : 1}";
-        
+        return "{oieeee : 2}";
     }
 
     @GET
