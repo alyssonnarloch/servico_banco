@@ -29,12 +29,6 @@ public class AccountResource {
     }
 
     @GET
-    @Produces("application/json")
-    public String test() {
-        return "{oieeee : 2}";
-    }
-
-    @GET
     @Path("/balanceverification/account/{account}/agency/{agency}/price/{price}")
     @Produces("application/json; charset=UTF-8")
     public Response balanceVerification(@PathParam("account") int account,
@@ -146,8 +140,8 @@ public class AccountResource {
         } catch (Exception ex) {
             t.rollback();
             ex.printStackTrace();
+            
             return Response.serverError().build();
         }
-
     }
 }
